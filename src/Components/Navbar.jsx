@@ -1,6 +1,10 @@
 import React from 'react';
 import logo from '../assets/logo (2).png'
 import { Link, NavLink } from 'react-router';
+import { FiLogOut } from 'react-icons/fi';
+import { MdManageAccounts } from 'react-icons/md';
+import { HiMiniPlus } from 'react-icons/hi2';
+import { IoIosCreate } from 'react-icons/io';
 const Navbar = () => {
   return (
     <div className="navbar bg-base-100 md:w-11/12 mx-auto  px-4">
@@ -53,13 +57,15 @@ const Navbar = () => {
         </ul>
       </div>
 
-      {/* Right side - Avatar */}
+      
       <div className="navbar-end">
         <div className="dropdown dropdown-end">
+      
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost btn-circle avatar"
+            className="btn btn-ghost btn-circle avatar tooltip tooltip-bottom"
+            data-tip="Sheikh Kiron"
           >
             <div className="w-10 rounded-full">
               <img
@@ -68,20 +74,36 @@ const Navbar = () => {
               />
             </div>
           </div>
+
+       
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-52"
           >
+            <p className="text-center font-semibold">Sheikh Kiron</p>
+            <p className="text-center border-b-2 border-gray-300 pb-1 text-sm text-gray-500">
+              SheikhKiron@gmail.com
+            </p>
+
             <li>
-              <a className="justify-between">
-                Profile <span className="badge">New</span>
+              <NavLink to="/create-event" className="text-[17px]">
+                <IoIosCreate /> Create Event
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/manage-events" className="text-[17px]">
+                <MdManageAccounts /> Manage Events
+              </NavLink>
+            </li>
+            <li className="border-b-2 border-gray-300">
+              <NavLink to="/joined-events" className="text-[17px]">
+                <HiMiniPlus /> Joined Events
+              </NavLink>
+            </li>
+            <li>
+              <a className="text-[17px] flex items-center gap-1">
+                <FiLogOut /> Logout
               </a>
-            </li>
-            <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <a>Logout</a>
             </li>
           </ul>
         </div>
