@@ -5,6 +5,7 @@ import Upcoming from "../Pages/Upcoming";
 import CreateEvent from "../Pages/CreateEvent";
 import ManageEvent from "../Pages/ManageEvent";
 import JoinedEvent from "../Pages/JoinedEvent";
+import Register from "../Pages/Register";
 
 export const router = createBrowserRouter([
   {
@@ -13,6 +14,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       { path: '/upcoming-events', Component: Upcoming },
+      { path: '/register', Component: Register},
       {path:'/create-event',element:<CreateEvent></CreateEvent>},
       {path:'/manage-events',element:<ManageEvent></ManageEvent>},
       {path:'/joined-events',element:<JoinedEvent></JoinedEvent>},
