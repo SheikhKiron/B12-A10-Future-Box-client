@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { use } from 'react';
 import logo from '../assets/logo (2).png'
 import { Link, NavLink } from 'react-router';
 import { FiLogOut } from 'react-icons/fi';
 import { MdManageAccounts } from 'react-icons/md';
 import { HiMiniPlus } from 'react-icons/hi2';
 import { IoIosCreate } from 'react-icons/io';
+import { AuthContext } from '../Auth/AuthContext';
 const Navbar = () => {
+  const { user, logOut } = use(AuthContext)
+ 
+  const handleLogout = () => {
+    logOut()
+      .then()
+      .catch(err => {
+        console.log(err.message);
+    })
+  }
   return (
     <div className="navbar bg-base-100 md:w-11/12 mx-auto  px-4">
       <div className="flex items-center gap-2 navbar-start">
@@ -57,56 +67,59 @@ const Navbar = () => {
         </ul>
       </div>
 
-      
       <div className="navbar-end">
-        <div className="dropdown dropdown-end">
-      
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle avatar tooltip tooltip-bottom"
-            data-tip="Sheikh Kiron"
-          >
-            <div className="w-10 rounded-full">
-              <img
-                alt="Profile"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
+        {user ? (
+          <div className="flex gap-5">
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar tooltip tooltip-bottom"
+                data-tip={user.displayName}
+              >
+                <div className="w-10 rounded-full">
+                  <img
+                    alt="Profile"
+                    src={user.photoURL}
+                  />
+                </div>
+              </div>
+
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <p className="text-center font-semibold">{user.displayName}</p>
+                <p className="text-center border-b-2 border-gray-300 pb-1 text-sm text-gray-500">
+                  {user.email}
+                </p>
+
+                <li>
+                  <NavLink to="/create-event" className="text-[17px]">
+                    <IoIosCreate /> Create Event
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/manage-events" className="text-[17px]">
+                    <MdManageAccounts /> Manage Events
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/joined-events" className="text-[17px]">
+                    <HiMiniPlus /> Joined Events
+                  </NavLink>
+                </li>
+              </ul>
             </div>
+            <button className="text-[16px] flex items-center gap-1 btn bg-[#0a400c] text-white" onClick={handleLogout}>
+              <FiLogOut /> Logout
+            </button>
           </div>
-
-       
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <p className="text-center font-semibold">Sheikh Kiron</p>
-            <p className="text-center border-b-2 border-gray-300 pb-1 text-sm text-gray-500">
-              SheikhKiron@gmail.com
-            </p>
-
-            <li>
-              <NavLink to="/create-event" className="text-[17px]">
-                <IoIosCreate /> Create Event
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/manage-events" className="text-[17px]">
-                <MdManageAccounts /> Manage Events
-              </NavLink>
-            </li>
-            <li className="border-b-2 border-gray-300">
-              <NavLink to="/joined-events" className="text-[17px]">
-                <HiMiniPlus /> Joined Events
-              </NavLink>
-            </li>
-            <li>
-              <a className="text-[17px] flex items-center gap-1">
-                <FiLogOut /> Logout
-              </a>
-            </li>
-          </ul>
-        </div>
+        ) : (
+          <button className="btn bg-[#0a400c] text-[16px] text-white">
+            Register
+          </button>
+        )}
       </div>
     </div>
   );
