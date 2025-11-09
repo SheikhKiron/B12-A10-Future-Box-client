@@ -1,10 +1,12 @@
 import React, { use } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import styled from 'styled-components';
 import { AuthContext } from '../Auth/AuthContext';
+import { toast } from 'react-toastify';
 
 const Register = () => {
-const { createUser, profileupdate } = use(AuthContext);
+  const { createUser, profileupdate } = use(AuthContext);
+  const navigate=useNavigate()
   const handleRegister = (e) => {
     e.preventDefault()
     const displayName = e.target.name.value;
@@ -12,17 +14,47 @@ const { createUser, profileupdate } = use(AuthContext);
     const password = e.target.password.value;
     const photoURL = e.target.photo.value;
     console.log(displayName, email, password, photoURL);
+       if (!displayName) {
+         toast.error('Name is required!');
+         return;
+       }
+
+       if (!email) {
+         toast.error('Email is required!');
+         return;
+       }
+       if (!photoURL) {
+         toast.error('Email is required!');
+         return;
+       }
+
+      if (
+        !/[A-Z]/.test(password) ||
+        !/[a-z]/.test(password) ||
+        password.length < 6
+      ) {
+        return toast.error(
+          'Password must have 6+ chars, 1 uppercase & 1 lowercase!'
+        );
+      }
+
     createUser(email,password)
       .then(result => {
         console.log(result.user);
         profileupdate(displayName, photoURL)
-          .then()
+          .then(() => {
+          
+            toast.success('Registration Successful!');
+            navigate('/');
+        })
           .catch(err => {
             console.log(err.message);
-        })
+          });
+        e.target.reset();
       })
       .catch(err => {
-      console.log(err.message);
+        console.log(err.message);
+         toast.error(err.message);
     })
   }
   return (
@@ -35,10 +67,10 @@ const { createUser, profileupdate } = use(AuthContext);
             <p>Sing up now to become a member.</p>
           </div>
           <form onSubmit={handleRegister}>
-            <input type="text" name='name' placeholder="Enter Name" required />
-            <input type="email" name='email' placeholder="Enter Emaill" required />
-            <input type="password" name='password' placeholder="Choose A Password" required />
-            <input type="text" name='photo' placeholder="photoURL....." required />
+            <input type="text" name='name' placeholder="Enter Name"  />
+            <input type="email" name='email' placeholder="Enter Emaill"  />
+            <input type="password" name='password' placeholder="Choose A Password"  />
+            <input type="text" name='photo' placeholder="photoURL....."  />
             <input type="submit" value="Signup" />
             <span>
               {' '}

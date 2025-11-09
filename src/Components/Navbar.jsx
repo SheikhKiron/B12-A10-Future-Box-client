@@ -116,9 +116,9 @@ const Navbar = () => {
             </button>
           </div>
         ) : (
-          <button className="btn bg-[#0a400c] text-[16px] text-white">
+          <Link to='/register' className="btn bg-[#0a400c] text-[16px] text-white">
             Register
-          </button>
+          </Link>
         )}
       </div>
     </div>

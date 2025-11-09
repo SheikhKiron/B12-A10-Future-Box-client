@@ -1,16 +1,43 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React, { use } from 'react';
+import { Link, useNavigate } from 'react-router';
 import styled from 'styled-components';
+import { AuthContext } from '../Auth/AuthContext';
+import { toast } from 'react-toastify';
 
 const Login = () => {
+  const { login, googleLogin } = use(AuthContext);
+  const navigate=useNavigate()
+  const handleLogin = (e) => {
+    e.preventDefault()
+    const name = e.target.email.value;
+    const email = e.target.password.value;
+    login(name, email)
+      .then(res => {
+        console.log(res.user);
+        toast.success('Login Successfully');
+        navigate('/')
+      })
+    .catch(err=>console.log(err.message))
+  }
+
+  const handleGoogle = () => {
+    googleLogin()
+      .then(res => {
+        console.log(res.user);
+        toast.success('Login Successfully')
+      })
+      .catch(err => {
+        console.log(err.message);
+      })
+  }
   return (
     <div className="flex justify-center py-10">
       <StyledWrapper>
         <div className="form-container">
           <p className="title">Welcome back</p>
-          <form className="form">
-            <input type="email" className="input" placeholder="Email" />
-            <input type="password" className="input" placeholder="Password" />
+          <form className="form" onSubmit={handleLogin}>
+            <input type="email" name='email' className="input" placeholder="Email" />
+            <input type="password" name='password' className="input" placeholder="Password" />
             <p className="page-link">
               <span className="page-link-label">
                 Forgot Password?
@@ -26,7 +53,7 @@ const Login = () => {
             </Link>
           </p>
           <div className="buttons-container">
-            <div className="google-login-button">
+            <div className="google-login-button" onClick={handleGoogle}>
               <svg
                 stroke="currentColor"
                 fill="currentColor"
