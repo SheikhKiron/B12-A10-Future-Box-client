@@ -1,6 +1,8 @@
 import React from 'react';
 import Slider from '../Components/Swiper/Slider';
 import FeatureSection from '../Components/FeatureSection';
+import Gallery from '../Components/Gallery';
+import NewsletterSection from '../Components/NewsletterSection';
 
 const Home = () => {
   return (
@@ -10,6 +12,8 @@ const Home = () => {
         <Slider></Slider>
       </div>
       <FeatureSection></FeatureSection>
+      <Gallery></Gallery>
+      <NewsletterSection></NewsletterSection>
     </div>
   );
 };
