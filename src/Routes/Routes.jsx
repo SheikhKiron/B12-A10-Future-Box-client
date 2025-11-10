@@ -7,6 +7,7 @@ import ManageEvent from "../Pages/ManageEvent";
 import JoinedEvent from "../Pages/JoinedEvent";
 import Register from "../Pages/Register";
 import Login from "../Pages/Login";
+import EventDetails from "../Pages/EventDetails";
 
 export const router = createBrowserRouter([
   {
@@ -14,12 +15,17 @@ export const router = createBrowserRouter([
     element: <Root></Root>,
     children: [
       { index: true, Component: Home },
-      { path: '/upcoming-events', Component: Upcoming },
+      {
+        path: '/upcoming-events',
+        Component: Upcoming,
+        loader: () => fetch('http://localhost:3000/events'),
+      },
       { path: '/register', Component: Register },
-      {path:'/login',Component:Login},
-      {path:'/create-event',element:<CreateEvent></CreateEvent>},
-      {path:'/manage-events',element:<ManageEvent></ManageEvent>},
-      {path:'/joined-events',element:<JoinedEvent></JoinedEvent>},
-    ]
+      { path: '/login', Component: Login },
+      { path: '/create-event', element: <CreateEvent></CreateEvent> },
+      { path: '/manage-events', element: <ManageEvent></ManageEvent> },
+      { path: '/joined-events', element: <JoinedEvent></JoinedEvent> },
+      { path: '/event-details/:id', element: <EventDetails></EventDetails> },
+    ],
   },
 ]);

@@ -1,14 +1,68 @@
-import React from 'react';
+import React, { use, useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { toast } from 'react-toastify';
+import { AuthContext } from './../Auth/AuthContext';
+import { useNavigate } from 'react-router';
 
 const CreateEvent = () => {
+  const [eventDate, setEventDate] = useState(null);
+  const { user } = use(AuthContext)
+  const navigate=useNavigate()
+  const handleInfo = (e) => {
+    e.preventDefault()
+    const name = e.target.name.value;
+    const category = e.target.category.value;
+    const photo = e.target.photo.value;
+    const location = e.target.location.value;
+    // const date = e.target.date.value;
+    const description = e.target.description.value;
+    if (!category) {
+      return toast.error('Please select your Event type!');
+    }
+    if (!name || !description || !photo || !location || !eventDate) {
+      return toast.error('All fields are required!');
+    }
+    console.log(name, category, photo, location, description);
+    const userInfo = {
+      title: name,
+      description: description,
+      eventType: category,
+      thumbnailUrl: photo,
+      location: location,
+      eventDate: eventDate.toISOString(),
+      createdByEmail: user.email,
+      createdByName: user.displayName,
+      createdByPhoto: user.photoURL,
+      createdAt: new Date().toISOString(),
+      joinedUsers: [],
+    };
+    fetch('http://localhost:3000/events', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userInfo),
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        if (data.insertedId) {
+          toast.success('Event Create Successfully');
+          navigate('/upcoming-events');
+        }
+      })
+      .catch(()=> toast.error('Server error!'));
+  }
+  
   return (
     <div className="py-5">
       <div className="max-w-3xl mx-auto p-6 bg-base-100 shadow-md rounded-2xl">
         <h2 className="text-2xl font-semibold mb-6 text-center">
-          Add 3D Model
+          Create event
         </h2>
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleInfo}>
           <div>
             <label className="block text-sm font-medium mb-1">Title</label>
             <input
@@ -19,14 +73,12 @@ const CreateEvent = () => {
             />
           </div>
 
-          <div className='border-2 p-2 border-gray-200 rounded-sm'>
-            <select className="block text-sm font-medium mb-1">
-              <option selected disabled>
-                Category
-              </option>
-              <option>Cleanup</option>
-              <option>Plantation</option>
-              <option>Donation</option>
+          <div className="border-2 p-2 border-gray-200 rounded-sm">
+            <select className="block text-sm font-medium mb-1" name="category">
+              <option value="">Event type</option>
+              <option value="Cleanup">Cleanup</option>
+              <option value="Plantation">Plantation</option>
+              <option value="Donation">Donation</option>
             </select>
           </div>
 
@@ -38,29 +90,30 @@ const CreateEvent = () => {
               type="url"
               placeholder="https://res.cloudinary.com/.../spaceship-thumb.jpg"
               className="input input-bordered w-full"
-              name="photoURL"
+              name="photo"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">
-              Location
-            </label>
+            <label className="block text-sm font-medium mb-1">Location</label>
             <input
-              type="url"
+              type="text"
               placeholder="Location"
               className="input input-bordered w-full"
-              name="photoURL"
+              name="location"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">
-              Thumbnail URL
-            </label>
-            <input
-              type="url"
-              placeholder="https://res.cloudinary.com/.../spaceship-thumb.jpg"
+            <label className="block text-sm font-medium mb-1">Event Date</label>
+            <DatePicker
+              selected={eventDate}
+              onChange={date => setEventDate(date)}
+              minDate={new Date()}
+              dateFormat="dd/MM/yyyy"
+              showMonthDropdown
+              showYearDropdown
+              placeholderText="Select a date"
               className="input input-bordered w-full"
-              name="photoURL"
+              name="date"
             />
           </div>
 
