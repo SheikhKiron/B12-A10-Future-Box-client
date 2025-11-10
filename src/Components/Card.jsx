@@ -1,9 +1,10 @@
 import React from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
 import { MdDateRange } from 'react-icons/md';
+import { Link } from 'react-router';
 
 const Card = ({ data }) => {
-  const { title, thumbnailUrl, location, eventDate, eventType, createdByName } = data;
+  const { title, thumbnailUrl, location, eventDate, eventType, createdByName,_id } = data;
   return (
     <div className="card bg-base-100 shadow-sm p-3">
       <figure className=" rounded-md">
@@ -31,9 +32,9 @@ const Card = ({ data }) => {
           Created By: {createdByName}
         </p>
         <div>
-          <button className="btn w-full bg-[#0a400c] text-white">
+          <Link to={`/event-details/${_id}`} className="btn w-full bg-[#0a400c] text-white">
             View Event
-          </button>
+          </Link>
         </div>
       </div>
     </div>

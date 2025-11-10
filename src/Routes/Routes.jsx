@@ -25,7 +25,10 @@ export const router = createBrowserRouter([
       { path: '/create-event', element: <CreateEvent></CreateEvent> },
       { path: '/manage-events', element: <ManageEvent></ManageEvent> },
       { path: '/joined-events', element: <JoinedEvent></JoinedEvent> },
-      { path: '/event-details/:id', element: <EventDetails></EventDetails> },
+      {
+        path: '/event-details/:id', element: <EventDetails></EventDetails>,
+        loader:({params})=>fetch(`http://localhost:3000/events/${params.id}`)
+       },
     ],
   },
 ]);
