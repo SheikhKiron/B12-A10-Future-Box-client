@@ -24,7 +24,7 @@ const Upcoming = () => {
 
   
   return (
-    <div className=' pb-10'>
+    <div className="bg-base-150 text-base-content pb-10">
       <div className="w-11/12 mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center py-4">
           Upcoming Events

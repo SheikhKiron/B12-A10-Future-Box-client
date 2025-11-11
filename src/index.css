@@ -10,12 +10,12 @@
 }
 
 .menu li{
-  color: #0A400C;
+  color: #10b981;
   font-size: 18px;
-  font-weight:500
+  font-weight:500;
 }
 
 .menu a.active{
-  color:rgb(7, 215, 14)
+  color:#0b7632;
 }
 

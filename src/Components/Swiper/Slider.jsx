@@ -27,7 +27,7 @@ export default function Slider() {
     <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
       {slides.map((slide, index) => (
         <SwiperSlide key={index}>
-          <div className="w-full h-[400px] md:h-[450px] relative overflow-hidden rounded-lg">
+          <div className="w-full h-[450px] md:h-[450px] relative overflow-hidden rounded-lg">
             <img
               src={slide.image}
               alt={slide.title}

@@ -1,109 +1,34 @@
 import React from 'react';
-import styled from 'styled-components';
 
 const NewsletterSection = () => {
   return (
-    <StyledWrapper>
-      <form className="form">
-        <span className="title">Subscribe to our newsletter</span>
-        <p className="description">
+    <div className="flex justify-center items-center py-16 px-4 bg-base-content dark:bg-gray-900 transition-colors duration-300">
+      <form className="flex flex-col items-center text-center w-full max-w-md">
+        <span className="text-3xl font-bold mb-2 text-white dark:text-green-400">
+          Subscribe to our newsletter
+        </span>
+        <p className="text-gray-300 dark:text-gray-300 mb-6">
           Get updates about upcoming events and community activities directly to
           your inbox.
         </p>
-        <div>
+        <div className="flex w-full gap-2 sm:flex-col sm:gap-2">
           <input
-            placeholder="Enter your email"
             type="email"
             name="email"
             id="email-address"
+            placeholder="Enter your email"
+            className="flex-1 p-3 text-sm rounded-md border border-white/30 bg-white/10 text-white dark:text-white placeholder-gray-200 dark:placeholder-gray-400 focus:border-yellow-400 outline-none transition"
           />
-          <button type="submit">Subscribe</button>
+          <button
+            type="submit"
+            className="p-3 text-sm font-semibold rounded-md bg-[#0a400c] text-white hover:bg-green-700 dark:hover:bg-green-600 transition-colors"
+          >
+            Subscribe
+          </button>
         </div>
       </form>
-    </StyledWrapper>
+    </div>
   );
 };
-
-const StyledWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 4rem 1rem;
-  // background: #0a400c; 
-
-  .form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    max-width: 28rem;
-    width: 100%;
-  }
-
-  .title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 0.5rem;
-  }
-
-  .description {
-    font-size: 1rem;
-    color: #d1d5db; 
-    margin-bottom: 1.5rem;
-  }
-
-  .form div {
-    display: flex;
-    width: 100%;
-    gap: 0.5rem;
-  }
-
-  .form div input {
-    flex: 1;
-    padding: 0.625rem 0.875rem;
-    font-size: 0.875rem;
-    border-radius: 0.375rem;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-    outline: none;
-  }
-
-  .form div input::placeholder {
-    color: #e5e7eb;
-  }
-
-  .form div input:focus {
-    border: 1px solid #facc15;
-  }
-
-  .form div button {
-    padding: 0.625rem 1rem;
-    font-size: 0.875rem;
-    font-weight: 600;
-    background-color: #facc15; 
-    color: #0a400c;
-    border-radius: 0.375rem;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .form div button:hover {
-    background-color: #eab308; 
-  }
-
-  @media (max-width: 640px) {
-    .form div {
-      flex-direction: column;
-    }
-
-    .form div input,
-    .form div button {
-      width: 100%;
-    }
-  }
-`;
 
 export default NewsletterSection;
