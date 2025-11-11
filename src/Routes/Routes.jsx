@@ -8,6 +8,7 @@ import JoinedEvent from "../Pages/JoinedEvent";
 import Register from "../Pages/Register";
 import Login from "../Pages/Login";
 import EventDetails from "../Pages/EventDetails";
+import Update from "../Pages/Update";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       { path: '/joined-events', element: <JoinedEvent></JoinedEvent> },
       {
         path: '/event-details/:id', element: <EventDetails></EventDetails>,
+        loader:({params})=>fetch(`http://localhost:3000/events/${params.id}`)
+       },
+      {
+        path: '/event/update/:id', element: <Update></Update>,
         loader:({params})=>fetch(`http://localhost:3000/events/${params.id}`)
        },
     ],

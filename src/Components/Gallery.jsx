@@ -11,7 +11,7 @@ const Gallery = () => {
   ];
 
   return (
-    <div className=" bg-gray-100">
+    <div className="">
       <section className="py-16 w-11/12 mx-auto">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">Event Gallery</h2>

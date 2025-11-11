@@ -29,7 +29,7 @@ const StyledWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 4rem 1rem;
-  background: #0a400c; 
+  // background: #0a400c; 
 
   .form {
     display: flex;

@@ -65,7 +65,7 @@ const JoinedEvent = () => {
           {events.map(event => (
             <li
               key={event._id}
-              className="flex flex-col md:flex-row items-center gap-4 p-4 bg-white rounded shadow"
+              className="flex flex-col md:flex-row items-center gap-4 p-4  rounded shadow-md"
             >
               <img
                 src={event.thumbnailUrl}

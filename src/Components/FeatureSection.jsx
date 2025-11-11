@@ -23,7 +23,7 @@ const FeatureSection = () => {
   ];
 
   return (
-    <div className="bg-gray-50">
+    <div className="">
       <section className="py-16 w-11/12 mx-auto">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">Our Features</h2>
@@ -31,7 +31,7 @@ const FeatureSection = () => {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition duration-300"
+                className=" p-6 rounded-lg shadow hover:shadow-lg transition duration-300"
               >
                 <div className="mb-4">{feature.icon}</div>
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>

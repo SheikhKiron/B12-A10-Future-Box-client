@@ -64,7 +64,7 @@ const handleDelete = async id => {
           {events.map(event => (
             <li
               key={event._id}
-              className="flex flex-col md:flex-row items-center gap-4 p-4 bg-white rounded shadow"
+              className="flex flex-col md:flex-row items-center gap-4 p-4  rounded shadow-md"
             >
               <img
                 src={event.thumbnailUrl}
@@ -86,7 +86,7 @@ const handleDelete = async id => {
               </div>
               <div className='flex gap-5'>
                 <Link
-                  to={`/event-details/${event._id}`}
+                  to={`/event/update/${event._id}`}
                   className="btn bg-[#0a400c] text-white"
                 >
                   Update
@@ -102,6 +102,7 @@ const handleDelete = async id => {
           ))}
         </ul>
       )}
+      
     </div>
   );
 };
