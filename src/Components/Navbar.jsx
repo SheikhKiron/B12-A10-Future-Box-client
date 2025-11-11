@@ -77,10 +77,14 @@ const Navbar = () => {
                 className="btn btn-ghost btn-circle avatar tooltip tooltip-bottom"
                 data-tip={user.displayName}
               >
-                <div className="w-10 rounded-full">
+                <div className="w-10 rounded-full border-2">
                   <img
                     alt="Profile"
-                    src={user.photoURL}
+                    src={
+                      user.photoURL
+                        ? user.photoURL
+                        : 'https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.jpg?semt=ais_hybrid&w=740&q=80'
+                    }
                   />
                 </div>
               </div>
@@ -111,12 +115,18 @@ const Navbar = () => {
                 </li>
               </ul>
             </div>
-            <button className="text-[16px] flex items-center gap-1 btn bg-[#0a400c] text-white" onClick={handleLogout}>
+            <button
+              className="text-[16px] flex items-center gap-1 btn bg-[#0a400c] text-white"
+              onClick={handleLogout}
+            >
               <FiLogOut /> Logout
             </button>
           </div>
         ) : (
-          <Link to='/register' className="btn bg-[#0a400c] text-[16px] text-white">
+          <Link
+            to="/register"
+            className="btn bg-[#0a400c] text-[16px] text-white"
+          >
             Register
           </Link>
         )}

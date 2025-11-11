@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div>
       <title>Home- Social Development</title>
-      <div className='py-5'>
+      <div className='py-5 w-11/12 mx-auto'>
         <Slider></Slider>
       </div>
       <FeatureSection></FeatureSection>

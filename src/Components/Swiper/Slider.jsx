@@ -18,7 +18,7 @@ export default function Slider() {
     },
     {
       image:
-        'https://www.shutterstock.com/shutterstock/videos/3641234463/thumb/1.jpg?ip=x480',
+        'https://cloudfrontgharpediabucket.gharpedia.com/uploads/2022/06/Plant-Trees-01-1403070001-1.jpg',
       title: 'Tree Plantation Drive',
     },
   ];
