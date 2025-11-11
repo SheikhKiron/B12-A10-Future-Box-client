@@ -7,10 +7,10 @@ import { useNavigate } from 'react-router';
 
 const CreateEvent = () => {
   const [eventDate, setEventDate] = useState(null);
-  const { user } = use(AuthContext)
-  const navigate=useNavigate()
-  const handleInfo = (e) => {
-    e.preventDefault()
+  const { user } = use(AuthContext);
+  const navigate = useNavigate();
+  const handleInfo = e => {
+    e.preventDefault();
     const name = e.target.name.value;
     const category = e.target.category.value;
     const photo = e.target.photo.value;
@@ -37,7 +37,7 @@ const CreateEvent = () => {
       createdAt: new Date().toISOString(),
       joinedUsers: [],
     };
-    fetch('http://localhost:3000/events', {
+    fetch('https://social-development-server-three.vercel.app/events', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -52,9 +52,9 @@ const CreateEvent = () => {
           navigate('/upcoming-events');
         }
       })
-      .catch(()=> toast.error('Server error!'));
-  }
-  
+      .catch(() => toast.error('Server error!'));
+  };
+
   return (
     <div className="bg-base-150 text-base-content py-5">
       <div className="max-w-3xl mx-auto p-6 bg-base-100 shadow-md rounded-2xl">

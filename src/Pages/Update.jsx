@@ -4,18 +4,21 @@ import { useLoaderData } from 'react-router';
 import { toast } from 'react-toastify';
 
 const Update = () => {
-  const data = useLoaderData()
+  const data = useLoaderData();
   const [eventDate, setEventDate] = useState(
     data.eventDate ? new Date(data.eventDate) : null
   );
   console.log(data);
-  const handleUpdate=(e) => {
-    e.preventDefault()
-   const name = e.target.name.value;
-   const category = e.target.category.value;
-   const photo = e.target.photo.value;
-   const location = e.target.location.value;
-    const description = e.target.description.value; 
+  const handleUpdate = e => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const category = e.target.category.value;
+    const photo = e.target.photo.value;
+    const location = e.target.location.value;
+    const description = e.target.description.value;
+    if (!category) return toast.error('Please select your Event type!');
+    if (!name || !description || !photo || !location || !eventDate)
+      return toast.error('All fields are required!');
     const updateInfo = {
       title: name,
       description: description,
@@ -23,14 +26,17 @@ const Update = () => {
       thumbnailUrl: photo,
       location: location,
       eventDate: eventDate ? eventDate.toISOString() : null,
-    }; 
-    fetch(`http://localhost:3000/events/${data._id}`, {
-       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updateInfo),
-    })
+    };
+    fetch(
+      `https://social-development-server-three.vercel.app/events/${data._id}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updateInfo),
+      }
+    )
       .then(res => res.json())
       .then(data => {
         console.log(data);
@@ -38,8 +44,7 @@ const Update = () => {
           toast.success('Event updated successfully!');
         }
       });
-    };
-
+  };
 
   return (
     <div>
@@ -110,7 +115,6 @@ const Update = () => {
                 placeholderText="Select a date"
                 className="input input-bordered w-full"
                 name="date"
-               
               />
             </div>
 
@@ -138,8 +142,7 @@ const Update = () => {
         </div>
       </div>
     </div>
-)};
-
-
+  );
+};
 
 export default Update;

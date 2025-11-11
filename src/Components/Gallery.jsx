@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Gallery = () => {
   const images = [
@@ -10,22 +11,52 @@ const Gallery = () => {
     'https://worldscoutfoundation.org/sites/default/files/styles/content_extra_large/public/2022-04/Bdesh%20%208%20800%20x%20450%2031FF109B-C157-41CB-B6E4-A91D13C99604.jpg.webp',
   ];
 
+
+  const container = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  
+  const card = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  };
+
   return (
     <div className="bg-base-200 text-base-content">
       <section className="py-16 w-11/12 mx-auto">
         <div className="max-w-6xl mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">Event Gallery</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">
+            Event Gallery
+          </h2>
+
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+          >
             {images.map((img, index) => (
-              <div key={index} className="overflow-hidden rounded-lg shadow-lg">
+              <motion.div
+                key={index}
+                className="overflow-hidden rounded-lg shadow-lg"
+                variants={card}
+                whileHover={{ scale: 1.05 }}
+              >
                 <img
                   src={img}
                   alt={`Event ${index + 1}`}
-                  className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+                  className="w-full h-64 object-cover transition-transform duration-300"
                 />
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

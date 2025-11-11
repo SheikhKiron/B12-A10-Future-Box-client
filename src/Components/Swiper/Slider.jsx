@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
+import { motion } from 'framer-motion';
 
 export default function Slider() {
   const slides = [
@@ -27,7 +28,13 @@ export default function Slider() {
     <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
       {slides.map((slide, index) => (
         <SwiperSlide key={index}>
-          <div className="w-full h-[450px] md:h-[450px] relative overflow-hidden rounded-lg">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ duration: 0.5 }}
+            className="w-full h-[450px] md:h-[450px] relative overflow-hidden rounded-lg"
+          >
             <img
               src={slide.image}
               alt={slide.title}
@@ -36,7 +43,7 @@ export default function Slider() {
             <div className="absolute bottom-8 left-8 md:bottom-16 md:left-16 bg-black bg-opacity-50 text-white p-4 rounded">
               <h2 className="text-xl md:text-4xl font-bold">{slide.title}</h2>
             </div>
-          </div>
+          </motion.div>
         </SwiperSlide>
       ))}
     </Swiper>

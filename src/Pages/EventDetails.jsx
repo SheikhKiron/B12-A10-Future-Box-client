@@ -6,8 +6,8 @@ import { AuthContext } from '../Auth/AuthContext';
 import { toast } from 'react-toastify';
 
 const EventDetails = () => {
-  const data = useLoaderData()
-  const { user } = use(AuthContext)
+  const data = useLoaderData();
+  const { user } = use(AuthContext);
   const [event, setEvent] = useState(data);
   const {
     title,
@@ -30,30 +30,32 @@ const EventDetails = () => {
       toast.error('This event has ended');
       return;
     }
-    fetch(`http://localhost:3000/events/join/${data._id}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: user.email,
-        name: user.displayName,
-        photo: user.photoURL,
-      }),
-    })
+    fetch(
+      `https://social-development-server-three.vercel.app/events/join/${data._id}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: user.email,
+          name: user.displayName,
+          photo: user.photoURL,
+        }),
+      }
+    )
       .then(res => res.json())
       .then(data => {
-        
         if (data.success) {
           setEvent(prev => ({
             ...prev,
-            joinedUsers: [...(prev.joinedUsers || []), { email: user.email }]
+            joinedUsers: [...(prev.joinedUsers || []), { email: user.email }],
           }));
           toast.success('You have joined this event!');
         } else {
           toast.error('Something went wrong!');
         }
       });
-  }
-  
+  };
+
   return (
     <div className="w-11/12 mx-auto py-3.5">
       <div className="hero bg-base-100">

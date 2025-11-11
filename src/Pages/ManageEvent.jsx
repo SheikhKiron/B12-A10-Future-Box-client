@@ -4,54 +4,76 @@ import { MdDateRange } from 'react-icons/md';
 import { FaLocationDot } from 'react-icons/fa6';
 import { Link } from 'react-router';
 import Swal from 'sweetalert2';
+import { motion } from 'framer-motion';
 
 const ManageEvent = () => {
-  const { user } = use(AuthContext)
-  const[events,setEvents]=useState([])
+  const { user } = use(AuthContext);
+  const [events, setEvents] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:3000/events/created/${user?.email}`)
+    fetch(
+      `https://social-development-server-three.vercel.app/events/created/${user?.email}`
+    )
       .then(res => res.json())
       .then(data => {
         console.log(data);
-        setEvents(data)
+        setEvents(data);
+      });
+  }, [user]);
+
+  const handleDelete = async id => {
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const res = await fetch(
+          `https://social-development-server-three.vercel.app/events/${id}`,
+          {
+            method: 'DELETE',
+          }
+        );
+        const data = await res.json();
+
+        if (data.deletedCount) {
+          setEvents(prev => prev.filter(event => event._id !== id));
+          Swal.fire({
+            title: 'Deleted!',
+            text: 'Event deleted successfully!',
+            icon: 'success',
+          });
+        } else {
+          Swal.fire('Failed!', 'Could not delete event.', 'error');
+        }
+      } catch {
+        Swal.fire('Error!', 'Something went wrong.', 'error');
       }
-        
-    )
-  }, [user])
-  
-const handleDelete = async id => {
-     const result = await Swal.fire({
-       title: 'Are you sure?',
-       text: "You won't be able to revert this!",
-       icon: 'warning',
-       showCancelButton: true,
-       confirmButtonColor: '#3085d6',
-       cancelButtonColor: '#d33',
-       confirmButtonText: 'Yes, delete it!',
-     });
+    }
+  };
 
-     if (result.isConfirmed) {
-       try {
-         const res = await fetch(`http://localhost:3000/events/${id}`, {
-           method: 'DELETE',
-         });
-         const data = await res.json();
+  const container = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
 
-         if (data.deletedCount) {
-           setEvents(prev => prev.filter(event => event._id !== id));
-           Swal.fire({
-             title: 'Deleted!',
-             text: 'Event deleted successfully!',
-             icon: 'success',
-           });
-         } else {
-           Swal.fire('Failed!', 'Could not delete event.', 'error');
-         }
-       } catch {
-         Swal.fire('Error!', 'Something went wrong.', 'error');
-       }
-     }
-   };
+  const cardVariant = {
+    hidden: { opacity: 0, y: 30 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: 'easeOut' },
+    },
+  };
 
   return (
     <div className="bg-base-100 text-base-content">
@@ -61,11 +83,18 @@ const handleDelete = async id => {
         {events.length === 0 ? (
           <p>You haven’t created any events yet.</p>
         ) : (
-          <ul className="space-y-4">
+          <motion.ul
+            className="space-y-4"
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+          >
             {events.map(event => (
-              <li
+              <motion.li
                 key={event._id}
                 className="flex flex-col md:flex-row items-center gap-4 p-4 bg-base-200 text-base-content  rounded shadow"
+                variants={cardVariant}
               >
                 <img
                   src={event.thumbnailUrl}
@@ -99,9 +128,9 @@ const handleDelete = async id => {
                     Delete
                   </button>
                 </div>
-              </li>
+              </motion.li>
             ))}
-          </ul>
+          </motion.ul>
         )}
       </div>
     </div>

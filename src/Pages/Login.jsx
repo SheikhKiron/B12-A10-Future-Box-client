@@ -1,23 +1,30 @@
 import React, { use } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import styled from 'styled-components';
 import { AuthContext } from '../Auth/AuthContext';
 import { toast } from 'react-toastify';
 
 const Login = () => {
   const { login, googleLogin } = use(AuthContext);
-  const navigate=useNavigate()
+  const location=useLocation()
+  const navigate = useNavigate()
+  const from = location.state?.from?.pathname || '/';
   const handleLogin = (e) => {
     e.preventDefault()
-    const name = e.target.email.value;
-    const email = e.target.password.value;
-    login(name, email)
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    login( email,password)
       .then(res => {
         console.log(res.user);
         toast.success('Login Successfully');
-        navigate('/')
+         navigate(from, { replace: true });
       })
-    .catch(err=>console.log(err.message))
+      .catch(err => {
+        console.log(err.message)
+        toast.error(err.code)
+      }
+      
+    )
   }
 
   const handleGoogle = () => {
