@@ -5,18 +5,22 @@ import { FaLocationDot } from 'react-icons/fa6';
 import { MdDateRange } from 'react-icons/md';
 import Swal from 'sweetalert2';
 import { motion } from 'framer-motion';
+import Spinner from '../Components/Spinner';
 
 const JoinedEvent = () => {
   const { user } = use(AuthContext);
   const [events, setEvents] = useState([]);
-
+const[loading,setLoading]=useState(true)
   useEffect(() => {
     if (!user?.email) return;
     fetch(
       `https://social-development-server-three.vercel.app/events/join/${user.email}`
     )
       .then(res => res.json())
-      .then(data => setEvents(data))
+      .then(data => {
+        setEvents(data)
+        setLoading(false)
+      })
       .catch(err => console.error(err));
   }, [user]);
 
@@ -28,7 +32,7 @@ const JoinedEvent = () => {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonText: 'Yes, cancel it!',
     });
 
     if (result.isConfirmed) {
@@ -77,8 +81,13 @@ const JoinedEvent = () => {
     },
   };
 
+  if (loading) {
+    return <Spinner></Spinner>
+  }
+
   return (
     <div className="w-11/12 mx-auto py-5">
+      <title>Join Events | Social Development</title>
       <h2 className="text-3xl font-bold mb-5">My Joined Events</h2>
 
       {events.length === 0 ? (

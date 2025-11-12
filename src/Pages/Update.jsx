@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, {use, useState } from 'react';
 import DatePicker from 'react-datepicker';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
+import Spinner from '../Components/Spinner';
+import { AuthContext } from '../Auth/AuthContext';
 
 const Update = () => {
   const data = useLoaderData();
+  const navigate = useNavigate()
+    const { loading } = use(AuthContext);
   const [eventDate, setEventDate] = useState(
     data.eventDate ? new Date(data.eventDate) : null
   );
@@ -42,9 +46,14 @@ const Update = () => {
         console.log(data);
         if (data.modifiedCount) {
           toast.success('Event updated successfully!');
+          navigate('/manage-events');
         }
       });
   };
+
+  if (loading) {
+    return <Spinner></Spinner>;
+  }
 
   return (
     <div>

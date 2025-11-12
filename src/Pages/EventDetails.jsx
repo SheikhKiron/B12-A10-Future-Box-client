@@ -1,13 +1,14 @@
 import React, { use, useState } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
 import { MdDateRange } from 'react-icons/md';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 import { AuthContext } from '../Auth/AuthContext';
 import { toast } from 'react-toastify';
 
 const EventDetails = () => {
   const data = useLoaderData();
   const { user } = use(AuthContext);
+  const navigate=useNavigate()
   const [event, setEvent] = useState(data);
   const {
     title,
@@ -50,6 +51,7 @@ const EventDetails = () => {
             joinedUsers: [...(prev.joinedUsers || []), { email: user.email }],
           }));
           toast.success('You have joined this event!');
+          navigate('/joined-events');
         } else {
           toast.error('Something went wrong!');
         }
@@ -58,6 +60,7 @@ const EventDetails = () => {
 
   return (
     <div className="w-11/12 mx-auto py-3.5">
+      <title>{title}</title>
       <div className="hero bg-base-100">
         <div className="hero-content flex flex-col lg:flex-row">
           <div className="flex-1">

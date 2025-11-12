@@ -4,10 +4,11 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { toast } from 'react-toastify';
 import { AuthContext } from './../Auth/AuthContext';
 import { useNavigate } from 'react-router';
+import Spinner from '../Components/Spinner';
 
 const CreateEvent = () => {
   const [eventDate, setEventDate] = useState(null);
-  const { user } = use(AuthContext);
+  const { user,loading } = use(AuthContext);
   const navigate = useNavigate();
   const handleInfo = e => {
     e.preventDefault();
@@ -54,9 +55,13 @@ const CreateEvent = () => {
       })
       .catch(() => toast.error('Server error!'));
   };
+  if (loading) {
+    return <Spinner></Spinner>
+  }
 
   return (
     <div className="bg-base-150 text-base-content py-5">
+      <title>Create Event | Social Development</title>
       <div className="max-w-3xl mx-auto p-6 bg-base-100 shadow-md rounded-2xl">
         <h2 className="text-2xl font-semibold mb-6 text-center">
           Create event

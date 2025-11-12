@@ -1,12 +1,14 @@
 import React, { use } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import styled from 'styled-components';
 import { AuthContext } from '../Auth/AuthContext';
 import { toast } from 'react-toastify';
 
 const Register = () => {
   const { createUser, profileupdate } = use(AuthContext);
-  const navigate=useNavigate()
+  const navigate = useNavigate()
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
   const handleRegister = (e) => {
     e.preventDefault()
     const displayName = e.target.name.value;
@@ -45,7 +47,7 @@ const Register = () => {
           .then(() => {
           
             toast.success('Registration Successful!');
-            navigate('/');
+             navigate(from, { replace: true });
         })
           .catch(err => {
             console.log(err.message);
@@ -58,8 +60,9 @@ const Register = () => {
     })
   }
   return (
-    <div className='flex justify-center items-center my-10'>
-      <title>Register</title>
+    <div className="flex justify-center items-center my-10">
+      <title> Register | Social Development</title>
+
       <StyledWrapper>
         <div className="login">
           <div className="hader">
@@ -67,14 +70,21 @@ const Register = () => {
             <p>Sing up now to become a member.</p>
           </div>
           <form onSubmit={handleRegister}>
-            <input type="text" name='name' placeholder="Enter Name"  />
-            <input type="email" name='email' placeholder="Enter Emaill"  />
-            <input type="password" name='password' placeholder="Choose A Password"  />
-            <input type="text" name='photo' placeholder="photoURL....."  />
+            <input type="text" name="name" placeholder="Enter Name" />
+            <input type="email" name="email" placeholder="Enter Emaill" />
+            <input
+              type="password"
+              name="password"
+              placeholder="Choose A Password"
+            />
+            <input type="text" name="photo" placeholder="photoURL....." />
             <input type="submit" value="Signup" />
             <span>
               {' '}
-              Already a member? <Link to='/login' className='underline'>Login Here</Link>
+              Already a member?{' '}
+              <Link to="/login" className="underline">
+                Login Here
+              </Link>
             </span>
           </form>
         </div>

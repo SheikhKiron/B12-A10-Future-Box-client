@@ -5,9 +5,11 @@ import { FaLocationDot } from 'react-icons/fa6';
 import { Link } from 'react-router';
 import Swal from 'sweetalert2';
 import { motion } from 'framer-motion';
+import Spinner from '../Components/Spinner';
 
 const ManageEvent = () => {
   const { user } = use(AuthContext);
+  const[loading,setLoading]=useState(true)
   const [events, setEvents] = useState([]);
   useEffect(() => {
     fetch(
@@ -17,6 +19,7 @@ const ManageEvent = () => {
       .then(data => {
         console.log(data);
         setEvents(data);
+        setLoading(false)
       });
   }, [user]);
 
@@ -74,9 +77,13 @@ const ManageEvent = () => {
       transition: { duration: 0.5, ease: 'easeOut' },
     },
   };
+  if (loading) {
+    return <Spinner></Spinner>
+  }
 
   return (
     <div className="bg-base-100 text-base-content">
+      <title>Manage Events | Social Development</title>
       <div className="w-11/12 mx-auto py-5 ">
         <h2 className="text-3xl font-bold mb-5">My Created Events</h2>
 

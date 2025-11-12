@@ -6,6 +6,7 @@ import { MdManageAccounts } from 'react-icons/md';
 import { HiMiniPlus } from 'react-icons/hi2';
 import { IoIosCreate } from 'react-icons/io';
 import { AuthContext } from '../Auth/AuthContext';
+import { toast } from 'react-toastify';
 const Navbar = () => {
   const { user, logOut } = use(AuthContext)
 
@@ -26,7 +27,9 @@ const Navbar = () => {
  
   const handleLogout = () => {
     logOut()
-      .then()
+      .then(() => {
+        toast.success('Logout Successfully')
+      })
       .catch(err => {
         console.log(err.message);
     })

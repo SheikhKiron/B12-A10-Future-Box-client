@@ -31,30 +31,29 @@ const Upcoming = () => {
     fetchEvents();
   }, []);
 
-  // Search input change
+
   const handleSearchChange = e => {
     const value = e.target.value;
     setSearchText(value);
 
     if (value === '') {
-      // input খালি → সব events দেখাও
+      
       fetchEvents('', category);
     }
   };
 
-  // Search submit
+
   const handleSearch = e => {
     e.preventDefault();
     fetchEvents(searchText, '');
   };
 
-  // Category filter submit
   const handleCategory = e => {
     e.preventDefault();
     fetchEvents('', category);
   };
 
-  // Upcoming filter
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const upComingEvent = events.filter(event => {
@@ -76,8 +75,9 @@ const Upcoming = () => {
 
   return (
     <div className="bg-base-100 text-base-content pb-10">
+      <title>Upcoming-Events | Social Development</title>
       <div className="w-11/12 mx-auto">
-        {/* Search & Category */}
+   
         <div className="flex justify-between py-5 flex-col-reverse md:flex-row gap-4">
           <form onSubmit={handleSearch} className="flex flex-row gap-2 flex-1">
             <input

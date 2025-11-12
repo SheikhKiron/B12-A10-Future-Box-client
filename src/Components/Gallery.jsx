@@ -7,7 +7,7 @@ const Gallery = () => {
     'https://media.istockphoto.com/id/1152329427/photo/male-and-female-group-of-college-graduates-doing-community-service-street-and-roadside-cleanup.jpg?s=612x612&w=0&k=20&c=zobzGo4ch3Cue_ZGYKP40okap74WUSnHdH4TfbhPjSc=',
     'https://drop.ndtv.com/albums/NEWS/tree-plantation-in-india/tree-plantation-in-india-green-yatra.jpg',
     'https://english.news.cn/asiapacific/20220617/6120b4a5f1494541b2bf30c7a415114d/7cfe8b498db24c949e07a8d51c90b766.jpg',
-    'https://thumbs.dreamstime.com/b/child-cutting-paper-class-development-social-lerning-school-kids-children-children-s-project-kindergarten-pictures-84256026.jpg',
+    'https://www.presidiumvivekvihar.com/images/gallery/tree-plantation/tree-plantation-0004.jpg',
     'https://worldscoutfoundation.org/sites/default/files/styles/content_extra_large/public/2022-04/Bdesh%20%208%20800%20x%20450%2031FF109B-C157-41CB-B6E4-A91D13C99604.jpg.webp',
   ];
 

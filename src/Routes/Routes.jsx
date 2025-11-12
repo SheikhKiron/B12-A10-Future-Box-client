@@ -10,11 +10,13 @@ import Login from '../Pages/Login';
 import EventDetails from '../Pages/EventDetails';
 import Update from '../Pages/Update';
 import PrivateRouter from '../Auth/PrivateRouter';
+import Error from '../Pages/Error';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <Root></Root>,
+    errorElement:<Error></Error>,
     children: [
       { index: true, Component: Home },
       {

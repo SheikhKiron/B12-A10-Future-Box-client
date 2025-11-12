@@ -32,6 +32,7 @@ const Login = () => {
       .then(res => {
         console.log(res.user);
         toast.success('Login Successfully')
+              navigate(from, { replace: true });
       })
       .catch(err => {
         console.log(err.message);
@@ -39,6 +40,7 @@ const Login = () => {
   }
   return (
     <div className="flex justify-center py-10">
+      <title>Login | Social Development</title>
       <StyledWrapper>
         <div className="form-container">
           <p className="title">Welcome back</p>
@@ -109,7 +111,7 @@ const StyledWrapper = styled.div`
   .form-container {
     width: 320px;
     
-    background-color: #fff;
+  
     border: 2px solid green;
     border-radius: 5px;
     box-sizing: border-box;
