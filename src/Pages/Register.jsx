@@ -15,7 +15,7 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const photoURL = e.target.photo.value;
-    console.log(displayName, email, password, photoURL);
+    // console.log(displayName, email, password, photoURL);
        if (!displayName) {
          toast.error('Name is required!');
          return;
@@ -42,7 +42,7 @@ const Register = () => {
 
     createUser(email,password)
       .then(result => {
-        console.log(result.user);
+        // console.log(result.user);
         profileupdate(displayName, photoURL)
           .then(() => {
           
@@ -50,12 +50,13 @@ const Register = () => {
              navigate(from, { replace: true });
         })
           .catch(err => {
-            console.log(err.message);
+            // console.log(err.message);
+             toast.error(err.message);
           });
         e.target.reset();
       })
       .catch(err => {
-        console.log(err.message);
+        // console.log(err.message);
          toast.error(err.message);
     })
   }

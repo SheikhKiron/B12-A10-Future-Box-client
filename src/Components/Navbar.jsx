@@ -31,7 +31,7 @@ const Navbar = () => {
         toast.success('Logout Successfully')
       })
       .catch(err => {
-        console.log(err.message);
+       toast.error(err.code);
     })
   }
   return (
@@ -205,7 +205,7 @@ const Navbar = () => {
                 to="/register"
                 className="btn bg-[#0a400c] text-[16px] text-white"
               >
-                Register
+               Sign Up
               </Link>
             </div>
           )}

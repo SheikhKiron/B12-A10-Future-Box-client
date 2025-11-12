@@ -17,7 +17,7 @@ const ManageEvent = () => {
     )
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         setEvents(data);
         setLoading(false)
       });
@@ -39,6 +39,9 @@ const ManageEvent = () => {
         const res = await fetch(
           `https://social-development-server-three.vercel.app/events/${id}`,
           {
+            headers: {
+              authorization: `Bearer ${user.accessToken}`,
+            },
             method: 'DELETE',
           }
         );

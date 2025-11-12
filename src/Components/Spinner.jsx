@@ -21,7 +21,7 @@ const Spinner = () => {
       </div>
 
       {/* Tailwind keyframes */}
-      <style jsx>{`
+      <style>{`
         @keyframes spinnerAni {
           0% {
             transform: rotate(0deg) translateY(-200%);

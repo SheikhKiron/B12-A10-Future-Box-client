@@ -1,13 +1,14 @@
-import React, { use } from 'react';
+import React, { use, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import styled from 'styled-components';
 import { AuthContext } from '../Auth/AuthContext';
 import { toast } from 'react-toastify';
 
 const Login = () => {
-  const { login, googleLogin } = use(AuthContext);
+  const { login, googleLogin ,forget} = use(AuthContext);
   const location=useLocation()
   const navigate = useNavigate()
+  const emailRef=useRef()
   const from = location.state?.from?.pathname || '/';
   const handleLogin = (e) => {
     e.preventDefault()
@@ -15,12 +16,12 @@ const Login = () => {
     const password = e.target.password.value;
     login( email,password)
       .then(res => {
-        console.log(res.user);
+        // console.log(res.user);
         toast.success('Login Successfully');
          navigate(from, { replace: true });
       })
       .catch(err => {
-        console.log(err.message)
+        // console.log(err.message)
         toast.error(err.code)
       }
       
@@ -30,14 +31,33 @@ const Login = () => {
   const handleGoogle = () => {
     googleLogin()
       .then(res => {
-        console.log(res.user);
+        // console.log(res.user);
         toast.success('Login Successfully')
               navigate(from, { replace: true });
       })
       .catch(err => {
-        console.log(err.message);
+        // console.log(err.message);
+        toast.error(err.code);
+
       })
   }
+  const forgetHandle = () => {
+    const email =emailRef.current.value;
+    console.log(email);
+      if (!email) {
+        toast.error('Please enter your email');
+        return;
+      }
+    forget(email)
+      .then(() => {
+      toast(
+        'Check your email. If you do not receive it, check your spam/junk folder.'
+        )
+      })
+      .catch(err => {
+        toast.error(err.code)
+      })
+    }
   return (
     <div className="flex justify-center py-10">
       <title>Login | Social Development</title>
@@ -45,10 +65,10 @@ const Login = () => {
         <div className="form-container">
           <p className="title">Welcome back</p>
           <form className="form" onSubmit={handleLogin}>
-            <input type="email" name='email' className="input" placeholder="Email" />
+            <input type="email" name='email' className="input" ref={emailRef}  placeholder="Email" />
             <input type="password" name='password' className="input" placeholder="Password" />
             <p className="page-link">
-              <span className="page-link-label">
+              <span className="page-link-label" onClick={forgetHandle}>
                 Forgot Password?
               </span>
             </p>

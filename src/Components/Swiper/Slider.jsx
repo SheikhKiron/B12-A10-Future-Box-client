@@ -1,51 +1,67 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
+// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
+
+import './styles.css';
+
+// import required modules
 import { Navigation } from 'swiper/modules';
 import { motion } from 'framer-motion';
 
 export default function Slider() {
-  const slides = [
-    {
-      image:
-        'https://www.paulsrubbish.com.au/wp-content/uploads/2023/04/community-cleanup.png',
-      title: 'Community Clean Up Event',
-    },
-    {
-      image:
-        'https://stanfordbloodcenter.org/wp-content/uploads/2021/05/iStock-1196814000.jpg',
-      title: 'Blood Donation Camp',
-    },
-    {
-      image:
-        'https://cloudfrontgharpediabucket.gharpedia.com/uploads/2022/06/Plant-Trees-01-1403070001-1.jpg',
-      title: 'Tree Plantation Drive',
-    },
-  ];
-
+  const faqVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
   return (
-    <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-      {slides.map((slide, index) => (
-        <SwiperSlide key={index}>
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -50 }}
-            transition={{ duration: 0.5 }}
-            className="w-full h-[450px] md:h-[450px] relative overflow-hidden rounded-lg"
-          >
-            <img
-              src={slide.image}
-              alt={slide.title}
-              className="w-full h-full object-cover object-center"
-            />
-            <div className="absolute bottom-8 left-8 md:bottom-16 md:left-16 bg-black bg-opacity-50 text-white p-4 rounded">
-              <h2 className="text-xl md:text-4xl font-bold">{slide.title}</h2>
-            </div>
-          </motion.div>
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={faqVariants}
+    >
+      <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+        <SwiperSlide>
+          <img
+            src="https://plus.unsplash.com/premium_photo-1681140560805-de6115554023?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt=""
+          />
+          <h2 className="absolute text-5xl text-yellow-300 font-bold">
+            May our city live green.
+          </h2>
         </SwiperSlide>
-      ))}
-    </Swiper>
+        <SwiperSlide>
+          <img
+            src="https://plus.unsplash.com/premium_photo-1723114876196-3ad72b4d17f6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fGJsb29kJTIwZG9uYXRpb258ZW58MHx8MHx8fDA%3D"
+            alt=""
+          />
+          <h2 className="absolute text-5xl text-blue-600 font-bold">
+            One bag of blood, one new life
+          </h2>
+        </SwiperSlide>
+        <SwiperSlide>
+          <img
+            src="https://plus.unsplash.com/premium_photo-1661964155049-f8a24a60be74?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZHJlc3MlMjBkb25hdGlvbnxlbnwwfHwwfHx8MA%3D%3D"
+            alt=""
+          />
+          <h2 className="absolute text-5xl text-blue-600 font-bold">
+            Help distribute winter clothes/clothes
+          </h2>
+        </SwiperSlide>
+        <SwiperSlide>
+          <img
+            src="https://images.unsplash.com/photo-1758599668429-121d54188b9c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1332"
+            alt=""
+          />
+          <h2 className="absolute text-5xl text-white font-bold">
+            We keep it clean wherever We live.
+          </h2>
+        </SwiperSlide>
+      </Swiper>
+    </motion.div>
   );
 }

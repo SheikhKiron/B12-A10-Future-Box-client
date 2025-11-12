@@ -24,7 +24,7 @@ const CreateEvent = () => {
     if (!name || !description || !photo || !location || !eventDate) {
       return toast.error('All fields are required!');
     }
-    console.log(name, category, photo, location, description);
+    // console.log(name, category, photo, location, description);
     const userInfo = {
       title: name,
       description: description,
@@ -42,12 +42,13 @@ const CreateEvent = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        authorization: `Bearer ${user.accessToken}`,
       },
       body: JSON.stringify(userInfo),
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         if (data.insertedId) {
           toast.success('Event Create Successfully');
           navigate('/upcoming-events');

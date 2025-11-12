@@ -5,6 +5,7 @@ import Gallery from '../Components/Gallery';
 import NewsletterSection from '../Components/NewsletterSection';
 import { AuthContext } from '../Auth/AuthContext';
 import Spinner from '../Components/Spinner';
+import Faq from '../Components/Faq';
 
 const Home = () => {
   const { loading } = use(AuthContext)
@@ -20,6 +21,7 @@ const Home = () => {
       <FeatureSection></FeatureSection>
       <Gallery></Gallery>
       <NewsletterSection></NewsletterSection>
+      <Faq></Faq>
     </div>
   );
 };

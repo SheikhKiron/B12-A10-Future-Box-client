@@ -12,7 +12,7 @@ const Update = () => {
   const [eventDate, setEventDate] = useState(
     data.eventDate ? new Date(data.eventDate) : null
   );
-  console.log(data);
+  // console.log(data);
   const handleUpdate = e => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -43,7 +43,7 @@ const Update = () => {
     )
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         if (data.modifiedCount) {
           toast.success('Event updated successfully!');
           navigate('/manage-events');

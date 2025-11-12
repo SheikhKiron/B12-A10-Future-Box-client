@@ -20,7 +20,7 @@ const EventDetails = () => {
     _id,
     description,
   } = data;
-  console.log(data);
+  // console.log(data);
 
   const joinHandle = () => {
     if (event.joinedUsers.some(u => u.email === user.email)) {

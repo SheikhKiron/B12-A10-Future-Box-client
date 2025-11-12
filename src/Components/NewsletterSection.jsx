@@ -1,8 +1,18 @@
 import React from 'react';
-
+import { motion } from 'framer-motion';
+const faqVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
 const NewsletterSection = () => {
   return (
-    <div className="flex justify-center items-center py-16 px-4 bg-base-content dark:bg-gray-900 transition-colors duration-300">
+    <motion.div
+      className="flex justify-center items-center py-16 px-4 bg-base-content dark:bg-gray-900 transition-colors duration-300"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={faqVariants}
+    >
       <form className="flex flex-col items-center text-center w-full max-w-md">
         <span className="text-3xl font-bold mb-2 text-white dark:text-green-400">
           Subscribe to our newsletter
@@ -27,7 +37,7 @@ const NewsletterSection = () => {
           </button>
         </div>
       </form>
-    </div>
+    </motion.div>
   );
 };
 
