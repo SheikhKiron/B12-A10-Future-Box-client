@@ -7,7 +7,7 @@ const faqVariants = {
 const NewsletterSection = () => {
   return (
     <motion.div
-      className="flex justify-center items-center py-16 px-4 bg-base-content dark:bg-gray-900 transition-colors duration-300"
+      className="flex justify-center items-center py-16 px-4 text-base-content dark:bg-gray-900 transition-colors duration-300"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}

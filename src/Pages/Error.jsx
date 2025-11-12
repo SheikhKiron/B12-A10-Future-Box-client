@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 const Error = () => {
   return (
-    <section className="bg-white dark:bg-gray-500 min-h-screen flex items-center justify-center">
+    <section className="bg-white dark:bg-gray-500 min-h-screen flex items-center justify-center text-base-content">
       <title>404 - Not Found</title>
       <div className="py-8 px-4 flex flex-col justify-center items-center text-gray-900 dark:text-white lg:py-16 lg:px-6">
         <div className="mx-auto max-w-screen-sm text-center">

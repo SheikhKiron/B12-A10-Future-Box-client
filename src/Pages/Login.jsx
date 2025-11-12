@@ -9,11 +9,20 @@ const Login = () => {
   const location=useLocation()
   const navigate = useNavigate()
   const emailRef=useRef()
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from || '/';
   const handleLogin = (e) => {
     e.preventDefault()
     const email = e.target.email.value;
     const password = e.target.password.value;
+     if (!email) {
+             toast.error('Email is required!');
+             return;
+           }
+           if (!password) {
+             toast.error('Password is required!');
+             return;
+           }
+    
     login( email,password)
       .then(res => {
         // console.log(res.user);
@@ -59,7 +68,7 @@ const Login = () => {
       })
     }
   return (
-    <div className="flex justify-center py-10">
+    <div className="flex justify-center py-10 text-base-content">
       <title>Login | Social Development</title>
       <StyledWrapper>
         <div className="form-container">

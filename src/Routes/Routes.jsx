@@ -52,9 +52,9 @@ export const router = createBrowserRouter([
       {
         path: '/event-details/:id',
         element: (
-          <PrivateRouter>
+         
             <EventDetails></EventDetails>
-          </PrivateRouter>
+        
         ),
         loader: ({ params }) =>
           fetch(

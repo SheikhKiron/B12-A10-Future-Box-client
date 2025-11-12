@@ -57,7 +57,7 @@ const Update = () => {
 
   return (
     <div>
-      <div className="py-5">
+      <div className="py-5 text-base-content">
         <div className="max-w-3xl mx-auto p-6 bg-base-100 shadow-md rounded-2xl">
           <h2 className="text-2xl font-semibold mb-6 text-center">
             Create event
@@ -134,7 +134,7 @@ const Update = () => {
               <textarea
                 className="textarea textarea-bordered w-full"
                 rows="4"
-                placeholder="Low-poly spaceship for space shooter games. PBR materials included."
+                placeholder="Let's make our neighborhood cleaner and healthier together."
                 name="description"
                 defaultValue={data.description}
               ></textarea>

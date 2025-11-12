@@ -8,7 +8,7 @@ const Register = () => {
   const { createUser, profileupdate } = use(AuthContext);
   const navigate = useNavigate()
     const location = useLocation();
-    const from = location.state?.from?.pathname || '/';
+    const from = location.state?.from || '/';
   const handleRegister = (e) => {
     e.preventDefault()
     const displayName = e.target.name.value;
@@ -26,7 +26,7 @@ const Register = () => {
          return;
        }
        if (!photoURL) {
-         toast.error('Email is required!');
+         toast.error('PhotoURL is required!');
          return;
        }
 
@@ -61,7 +61,7 @@ const Register = () => {
     })
   }
   return (
-    <div className="flex justify-center items-center my-10">
+    <div className="flex justify-center items-center my-10 text-base-content">
       <title> Register | Social Development</title>
 
       <StyledWrapper>

@@ -86,7 +86,7 @@ const[loading,setLoading]=useState(true)
   }
 
   return (
-    <div className="w-11/12 mx-auto py-5">
+    <div className="w-11/12 mx-auto py-5 text-base-content">
       <title>Join Events | Social Development</title>
       <h2 className="text-3xl font-bold mb-5">My Joined Events</h2>
 

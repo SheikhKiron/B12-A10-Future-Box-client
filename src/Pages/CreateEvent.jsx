@@ -130,7 +130,7 @@ const CreateEvent = () => {
             <textarea
               className="textarea textarea-bordered w-full"
               rows="4"
-              placeholder="Low-poly spaceship for space shooter games. PBR materials included."
+              placeholder="Let's make our neighborhood cleaner and healthier together."
               name="description"
             ></textarea>
           </div>

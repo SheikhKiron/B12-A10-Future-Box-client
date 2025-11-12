@@ -202,10 +202,10 @@ const Navbar = () => {
                 </svg>
               </label>
               <Link
-                to="/register"
+                to="/login"
                 className="btn bg-[#0a400c] text-[16px] text-white"
               >
-               Sign Up
+               Login
               </Link>
             </div>
           )}

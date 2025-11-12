@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 const Card = ({ data }) => {
   const { title, thumbnailUrl, location, eventDate, eventType, createdByName,_id } = data;
   return (
-    <div className="card bg-base-100 shadow-sm p-3">
+    <div className="card bg-base-100 text-base-content shadow-sm p-3">
       <figure className=" rounded-md">
         <img
           src={thumbnailUrl}
