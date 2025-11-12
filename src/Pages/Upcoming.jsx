@@ -77,7 +77,6 @@ const Upcoming = () => {
     <div className="bg-base-100 text-base-content pb-10">
       <title>Upcoming-Events | Social Development</title>
       <div className="w-11/12 mx-auto">
-   
         <div className="flex justify-between py-5 flex-col-reverse md:flex-row gap-4">
           <form onSubmit={handleSearch} className="flex flex-row gap-2 flex-1">
             <input
@@ -115,9 +114,9 @@ const Upcoming = () => {
 
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
-          variants={container}
-          initial="hidden"
-          whileInView="show"
+          variants={window.innerWidth < 768 ? {} : container} 
+          initial={window.innerWidth < 768 ? false : 'hidden'} 
+          whileInView={window.innerWidth < 768 ? false : 'show'}
           viewport={{ once: true, amount: 0.3 }}
         >
           {upComingEvent.length > 0 ? (
